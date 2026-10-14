@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#91b8e1" />
+  <title>Christening Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <article class="story-frame" aria-label="Christening invitation story">
+      <div class="art" aria-hidden="true">
+        <div class="specks"></div>
+        <span class="cloud one"></span><span class="cloud two"></span>
+        <span class="cloud three"></span><span class="cloud four"></span>
+        <span class="star s1">✦</span><span class="star s2">✧</span><span class="star s3">✦</span>
+        <span class="smile-star left">⌣</span><span class="smile-star right">⌣</span>
+        <span class="bubble b1"></span><span class="bubble b2"></span>
+        <div class="rainbow"></div>
+
+        <div class="balloon-cluster">
+          <svg viewBox="0 0 140 160" role="presentation">
+            <path d="M56 87 70 145M91 87 70 145M31 70 70 145M115 63 70 145" stroke="#ae926e" stroke-width="1.4"/>
+            <ellipse cx="35" cy="53" rx="27" ry="34" fill="#fdf3dd"/>
+            <ellipse cx="68" cy="38" rx="28" ry="35" fill="#82afe0"/>
+            <ellipse cx="99" cy="57" rx="27" ry="34" fill="#eaf6ff"/>
+            <ellipse cx="113" cy="34" rx="20" ry="25" fill="#f8e5ba"/>
+            <ellipse cx="53" cy="80" rx="22" ry="27" fill="#9fc8eb"/>
+            <ellipse cx="83" cy="83" rx="23" ry="26" fill="#fff8e9"/>
+            <path d="M49 133h43l-6 21H55Z" fill="#cba47a" stroke="#a97e58" stroke-width="2"/>
+            <circle cx="61" cy="121" r="9" fill="#b78a61"/><circle cx="79" cy="121" r="9" fill="#b78a61"/>
+            <circle cx="70" cy="128" r="16" fill="#cba078"/><ellipse cx="70" cy="134" rx="8" ry="6" fill="#f4dcc0"/>
+            <circle cx="65" cy="127" r="1.5" fill="#41372f"/><circle cx="75" cy="127" r="1.5" fill="#41372f"/>
+            <ellipse cx="70" cy="133" rx="2" ry="1.7" fill="#41372f"/><path d="M56 148q14-13 28 0" fill="#79a8d8"/>
+          </svg>
+        </div>
+
+        <div class="teddy-air">
+          <svg viewBox="0 0 130 185" role="presentation">
+            <path d="M20 53C20 17 43 5 66 5s46 17 46 48c0 30-22 48-46 48S20 83 20 53Z" fill="#fff3d9" stroke="#d9bb8a" stroke-width="2"/>
+            <path d="M67 6v93M34 19c-9 20-7 50 7 71M99 19c9 20 7 50-7 71" fill="none" stroke="#a6c8e8" stroke-width="8" opacity=".8"/>
+            <path d="M42 96 51 141M91 96 81 141" stroke="#a8896b" stroke-width="2"/>
+            <path d="M42 140h49l-8 36H50Z" fill="#bf946d" stroke="#916b4b" stroke-width="2"/>
+            <circle cx="54" cy="136" r="12" fill="#bb906d"/><circle cx="80" cy="136" r="12" fill="#bb906d"/>
+            <circle cx="67" cy="146" r="21" fill="#cba17d"/><ellipse cx="67" cy="155" rx="11" ry="8" fill="#f5dfc5"/>
+            <circle cx="59" cy="145" r="2" fill="#49382e"/><circle cx="75" cy="145" r="2" fill="#49382e"/>
+            <ellipse cx="67" cy="154" rx="3" ry="2" fill="#49382e"/><path d="M56 170q11-8 22 0" stroke="#85b2dc" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <section id="panel-1" class="story-panel active" aria-label="Story 1: Welcome">
+        <div class="panel-inner center-content">
+          <div class="glass welcome-card">
+            <p class="eyebrow">A DAY OF LOVE & BLESSING</p>
+            <h1 class="serif main-title">You’re Invited</h1>
+            <p class="serif subtitle">To a Christening Celebration</p>
+            <div class="gold-line"></div>
+
+            <div class="baby-photo-wrap">
+              <div class="baby-photo-frame">
+                <img src="images/baby.jpg" alt="Baby photo" class="baby-photo" />
+              </div>
+            </div>
+
+            <p class="tiny-intro">Celebrating the christening of</p>
+            <p id="babyName" class="script baby-name">Gabe Carmelo Espina</p>
+            <p class="invitation-copy">Please join us as we celebrate this beautiful beginning.</p>
+          </div>
+          <button id="blessing-button" type="button" class="blessing">Tap the stars for a little blessing ✦</button>
+          <p id="blessing-status" class="sr-only" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section id="panel-2" class="story-panel" aria-label="Story 2: Event details" hidden>
+        <div class="panel-inner">
+          <div class="glass details-card">
+            <p class="eyebrow">WITH LOVE, WE INVITE YOU</p>
+            <h2 class="serif section-title">The Lovely Details</h2>
+            <p class="script date-text">[Christening date]</p>
+            <div class="soft-line"></div>
+            <p class="detail-label">THE CHURCH</p>
+            <p class="serif detail-main">[Church name]</p>
+            <p class="detail-text">[Ceremony time]</p>
+            <p class="detail-text">[Ceremony venue or address]</p>
+            <div class="soft-line"></div>
+            <p class="detail-label">RECEPTION</p>
+            <p class="serif detail-main reception">[Reception venue and details]</p>
+          </div>
+          <p class="details-note">A little celebration, a lifetime of blessings.</p>
+        </div>
+      </section>
+
+      <section id="panel-3" class="story-panel" aria-label="Story 3: Gift ideas and RSVP" hidden>
+        <div class="panel-inner">
+          <div class="glass gift-card">
+            <h2 class="script gift-title">Gift Ideas</h2>
+            <p>Your presence and prayers are the loveliest gifts. If you wish to bring something, a little note for baby would be treasured.</p>
+          </div>
+
+          <div class="glass rsvp-card">
+            <h3 class="serif rsvp-title">Kindly RSVP</h3>
+            <p class="rsvp-intro">Find your name on our guest list, then let us know if you can join us.</p>
+
+            <form id="rsvp-form" novalidate>
+              <div class="guest-search-wrap">
+                <label for="guest-search">Search your invited name</label>
+                <input id="guest-search" class="form-control" type="search" maxlength="120" autocomplete="off" placeholder="Start typing your name…" />
+                <p id="guest-search-status" class="search-status" aria-live="polite">Type at least 2 letters of your name.</p>
+                <div id="guest-results" class="guest-results" aria-label="Matching invited guests"></div>
+              </div>
+
+              <div id="selected-guest" class="selected-guest hidden">
+                <div>
+                  <small>RSVP for</small>
+                  <strong id="selected-guest-name"></strong>
+                </div>
+                <button id="change-guest" type="button">Change</button>
+              </div>
+
+              <div id="response-fields" class="hidden">
+                <fieldset>
+                  <legend>Will you attend?</legend>
+                  <div class="choice-grid">
+                    <button id="attend-yes" class="choice" type="button" aria-pressed="false">Joyfully attending</button>
+                    <button id="attend-no" class="choice" type="button" aria-pressed="false">Unable to attend</button>
+                  </div>
+                </fieldset>
+
+                <label for="dietary-notes">Dietary notes <span>(optional)</span></label>
+                <textarea id="dietary-notes" class="form-control" rows="2" maxlength="500" placeholder="Allergies or dietary requests"></textarea>
+
+                <p id="form-message" class="form-message hidden" role="status" aria-live="polite"></p>
+                <button id="submit-rsvp" class="submit" type="submit">
+                  <span class="submit-default">Submit RSVP</span>
+                  <span class="submit-loading hidden">Sending RSVP…</span>
+                </button>
+              </div>
+            </form>
+
+            <div id="confirmation" class="confirmation hidden" tabindex="-1" role="status" aria-live="polite">
+              <p class="serif confirmation-title">Thank you, <span id="confirmation-name"></span>!</p>
+              <p>Your RSVP has been sent successfully.</p>
+              <button id="another-rsvp" class="blessing" type="button">Submit another RSVP</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="nav-bar" aria-label="Story navigation">
+        <button id="previous" type="button" class="nav-button" disabled>Previous</button>
+        <div class="dots">
+          <button class="dot" type="button" data-panel="0" aria-label="Story 1: Welcome" aria-current="step"></button>
+          <button class="dot" type="button" data-panel="1" aria-label="Story 2: Event details"></button>
+          <button class="dot" type="button" data-panel="2" aria-label="Story 3: Gift ideas and RSVP"></button>
+        </div>
+        <button id="next" type="button" class="nav-button">Next</button>
+      </nav>
+    </article>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
