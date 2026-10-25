@@ -1,7 +1,5 @@
 const panels = [...document.querySelectorAll('.story-panel')];
 const dots = [...document.querySelectorAll('.dot')];
-const previous = document.getElementById('previous');
-const next = document.getElementById('next');
 let current = 0;
 
 function showPanel(index) {
@@ -13,29 +11,54 @@ function showPanel(index) {
   panels[current].classList.add('active');
   panels[current].scrollTop = 0;
   dots.forEach((dot, i) => i === current ? dot.setAttribute('aria-current','step') : dot.removeAttribute('aria-current'));
-  previous.disabled = current === 0;
-  next.disabled = current === panels.length - 1;
 }
-
-previous.addEventListener('click', () => showPanel(current - 1));
-next.addEventListener('click', () => showPanel(current + 1));
-dots.forEach((dot, i) => dot.addEventListener('click', () => showPanel(i)));
 
 document.addEventListener('keydown', (event) => {
   if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
-  if (event.key === 'ArrowRight') showPanel(current + 1);
-  if (event.key === 'ArrowLeft') showPanel(current - 1);
+  if (event.key === 'ArrowDown') showPanel(current + 1);
+  if (event.key === 'ArrowUp') showPanel(current - 1);
 });
 
-let touchX = null;
 const frame = document.querySelector('.story-frame');
-frame.addEventListener('touchstart', e => touchX = e.changedTouches[0].screenX, { passive:true });
-frame.addEventListener('touchend', e => {
-  if (touchX === null || e.target.closest('button,input,textarea')) return;
-  const delta = e.changedTouches[0].screenX - touchX;
-  if (Math.abs(delta) > 60) showPanel(current + (delta < 0 ? 1 : -1));
-  touchX = null;
-}, { passive:true });
+let swipeStart = null;
+frame.addEventListener('pointerdown', event => {
+  if (!event.isPrimary || event.button !== 0 || event.target.closest('button,input,textarea,select,a,[contenteditable="true"]')) return;
+  const panel = panels[current];
+  swipeStart = {
+    y: event.clientY,
+    pointerId: event.pointerId,
+    scrollTop: panel.scrollTop,
+    maxScroll: panel.scrollHeight - panel.clientHeight
+  };
+});
+frame.addEventListener('pointerup', event => {
+  if (!swipeStart || event.pointerId !== swipeStart.pointerId) return;
+  const deltaY = event.clientY - swipeStart.y;
+  const startedAtTop = swipeStart.scrollTop <= 0;
+  const startedAtBottom = swipeStart.scrollTop >= swipeStart.maxScroll;
+  const canNavigate = current !== panels.length - 1
+    || (deltaY < 0 && startedAtBottom)
+    || (deltaY > 0 && startedAtTop);
+  if (Math.abs(deltaY) > 60 && canNavigate) {
+    showPanel(current + (deltaY < 0 ? 1 : -1));
+  }
+  swipeStart = null;
+});
+frame.addEventListener('pointercancel', () => swipeStart = null);
+let lastWheelNavigation = 0;
+frame.addEventListener('wheel', event => {
+  if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+  const panel = panels[current];
+  const maxScroll = panel.scrollHeight - panel.clientHeight;
+  const canScroll = current === panels.length - 1
+    && (event.deltaY < 0 ? panel.scrollTop > 0 : panel.scrollTop < maxScroll);
+  if (canScroll) return;
+  event.preventDefault();
+  const now = Date.now();
+  if (now - lastWheelNavigation < 500) return;
+  showPanel(current + (event.deltaY > 0 ? 1 : -1));
+  lastWheelNavigation = now;
+}, { passive:false });
 
 document.getElementById('blessing-button').addEventListener('click', (event) => {
   document.getElementById('blessing-status').textContent = 'A little blessing for you.';
