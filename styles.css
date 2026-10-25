@@ -29,6 +29,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible { outline:3px so
 .tiny-intro { margin:0; color:var(--blue); font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
 .blessing { min-height:46px; border:1px solid #cda368; background:#fffbf1; color:#805727; border-radius:999px; padding:8px 18px; font-weight:600; box-shadow:0 5px 16px #436c9025; }
 .welcome-card + .blessing { margin-top:24px; }
+.scroll-hint { margin:10px 0 0; color:#fffdf2; font-size:12px; font-weight:600; letter-spacing:.04em; text-shadow:0 1px 5px #34598280; }
 .details-card { margin-top:16px; border-radius:26px; padding:20px; }
 .section-title { margin:6px 0 0; color:var(--blue); font-size:24px; font-weight:500; }
 .date-text { margin:8px 0 0; color:var(--gold); font-size:35px; }
