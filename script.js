@@ -21,30 +21,48 @@ document.addEventListener('keydown', (event) => {
 
 const frame = document.querySelector('.story-frame');
 let swipeStart = null;
-frame.addEventListener('pointerdown', event => {
-  if (!event.isPrimary || event.button !== 0 || event.target.closest('button,input,textarea,select,a,[contenteditable="true"]')) return;
+function beginSwipe(y, target) {
+  if (target.closest('button,input,textarea,select,a,[contenteditable="true"]')) return null;
   const panel = panels[current];
-  swipeStart = {
-    y: event.clientY,
-    pointerId: event.pointerId,
-    scrollTop: panel.scrollTop,
-    maxScroll: panel.scrollHeight - panel.clientHeight
-  };
-});
-frame.addEventListener('pointerup', event => {
-  if (!swipeStart || event.pointerId !== swipeStart.pointerId) return;
-  const deltaY = event.clientY - swipeStart.y;
-  const startedAtTop = swipeStart.scrollTop <= 0;
-  const startedAtBottom = swipeStart.scrollTop >= swipeStart.maxScroll;
+  return { y, panelIndex: current, scrollTop: panel.scrollTop, maxScroll: panel.scrollHeight - panel.clientHeight };
+}
+
+function finishSwipe(y, start) {
+  if (!start || start.panelIndex !== current) return;
+  const deltaY = y - start.y;
+  const startedAtTop = start.scrollTop <= 1;
+  const startedAtBottom = start.scrollTop >= start.maxScroll - 1;
   const canNavigate = current !== panels.length - 1
     || (deltaY < 0 && startedAtBottom)
     || (deltaY > 0 && startedAtTop);
   if (Math.abs(deltaY) > 60 && canNavigate) {
     showPanel(current + (deltaY < 0 ? 1 : -1));
   }
+}
+
+frame.addEventListener('touchstart', event => {
+  if (event.touches.length !== 1) {
+    swipeStart = null;
+    return;
+  }
+  swipeStart = beginSwipe(event.touches[0].clientY, event.target);
+}, { passive:true });
+frame.addEventListener('touchend', event => {
+  if (event.changedTouches.length === 1) finishSwipe(event.changedTouches[0].clientY, swipeStart);
   swipeStart = null;
+}, { passive:true });
+frame.addEventListener('touchcancel', () => swipeStart = null, { passive:true });
+
+let mouseSwipeStart = null;
+frame.addEventListener('pointerdown', event => {
+  if (event.pointerType !== 'mouse' || !event.isPrimary || event.button !== 0) return;
+  mouseSwipeStart = beginSwipe(event.clientY, event.target);
 });
-frame.addEventListener('pointercancel', () => swipeStart = null);
+frame.addEventListener('pointerup', event => {
+  if (event.pointerType === 'mouse') finishSwipe(event.clientY, mouseSwipeStart);
+  mouseSwipeStart = null;
+});
+frame.addEventListener('pointercancel', () => mouseSwipeStart = null);
 let lastWheelNavigation = 0;
 frame.addEventListener('wheel', event => {
   if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
